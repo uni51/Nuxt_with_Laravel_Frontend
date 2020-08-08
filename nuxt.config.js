@@ -38,11 +38,13 @@ export default {
         type: "text/javascript"
       },
       {
-        src: "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js",
+        src:
+          "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js",
         type: "text/javascript"
       },
       {
-        src: "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
+        src:
+          "https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js",
         type: "text/javascript"
       }
     ]
@@ -70,13 +72,40 @@ export default {
    */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios"
+    "@nuxtjs/axios",
+    "@nuxtjs/auth"
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: "http://127.0.0.1:8000/api/"
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "login",
+            method: "post",
+            propertyName: "meta.token"
+          },
+          user: {
+            url: "user",
+            method: "get",
+            propertyName: "data"
+          },
+          logout: {
+            url: "logout",
+            method: "post"
+          }
+        }
+      }
+    }
+  },
+
   /*
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
