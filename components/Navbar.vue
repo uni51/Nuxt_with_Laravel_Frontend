@@ -39,7 +39,7 @@
             <a class="nav-link">{{user.name}}</a>
           </li>
           <li class="nav-item">
-            <nuxt-link to="/register" class="nav-link">Logout</nuxt-link>
+            <a @click.prevent="logout" class="nav-link">Logout</a>
           </li>
         </ul>
       </template>
@@ -48,5 +48,11 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    logout() {
+      this.$auth.logout();
+    },
+  },
+};
 </script>
