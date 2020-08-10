@@ -12,7 +12,7 @@
           placeholder="Enter email"
           autofocus
         />
-        <small class="form-text text-danger">Show errors here</small>
+        <small class="form-text text-danger" v-if="errors.email">{{errors.email[0]}}</small>
       </div>
       <div class="form-group">
         <label>Password</label>
@@ -22,7 +22,7 @@
           class="form-control"
           placeholder="Password"
         />
-        <small class="form-text text-danger">Show errors here</small>
+        <small class="form-text text-danger" v-if="errors.password">{{errors.password[0]}}</small>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -40,18 +40,18 @@ export default {
     return {
       form: {
         email: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
   methods: {
     async submit() {
       await this.$auth.loginWith("local", {
-        data: this.form
+        data: this.form,
       });
 
-      this.$router.push("/");
-    }
-  }
+      this.$router.push({ path: this.$route.query.redirect });
+    },
+  },
 };
 </script>

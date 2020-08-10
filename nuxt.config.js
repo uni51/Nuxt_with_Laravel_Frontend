@@ -53,11 +53,16 @@ export default {
    ** Global CSS
    */
   css: [],
+
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ["./plugins/mixins/user.js", "./plugins/axios.js"],
+  plugins: [
+    "./plugins/mixins/user.js",
+    "./plugins/axios.js",
+    "./plugins/mixins/validation.js"
+  ],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
