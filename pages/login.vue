@@ -46,11 +46,20 @@ export default {
   },
   methods: {
     async submit() {
-      await this.$auth.loginWith("local", {
-        data: this.form,
-      });
-
-      this.$router.push({ path: this.$route.query.redirect });
+      await this.$axios
+        .$post("login", this.form)
+        .then((data) => {
+          this.$auth.loginWith("local", {
+            data: {
+              email: this.form.email,
+              password: this.form.password,
+            },
+          });
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };

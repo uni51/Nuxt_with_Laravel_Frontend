@@ -50,23 +50,28 @@ export default {
   data() {
     return {
       form: {
-        email: "",
         name: "",
+        email: "",
         password: "",
       },
     };
   },
   methods: {
     async submit() {
-      await this.$axios.$post("register", this.form);
-      await this.$auth.loginWith("local", {
-        data: {
-          email: this.form.email,
-          password: this.form.password,
-        },
-      });
-      // redirect
-      this.$router.push({ path: this.$route.query.redirect });
+      await this.$axios
+        .$post("register", this.form)
+        .then((data) => {
+          this.$auth.loginWith("local", {
+            data: {
+              email: this.form.email,
+              password: this.form.password,
+            },
+          });
+          console.log(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   },
 };
